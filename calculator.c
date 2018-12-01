@@ -1142,17 +1142,6 @@ int strSplit(char *str, const char split, char *(**partsRef))
 	return numParts;
 }
 
-/*bool isCommand(char *str)
-{
-	bool result = false;
-	char **words = NULL;
-	int len = strSplit(str, ' ', &words);
-	if(len >= 1 && strcmp(words[0], "set") == 0)
-	{
-		result = true;
-	}
-	return result;
-}*/
 
 bool execCommand(char *str)
 {
@@ -1298,33 +1287,28 @@ int main(int argc, char *argv[])
 		}
 	}
 	str = ufgets(stdin);
-	while(str != NULL && strcmp(str, "quit") != 0)
-	{
-		if (strlen(str) == 0)
-			goto get_new_string;
-		if(type(*str) == text)
-		{
-			// Do something with command
-			if (!execCommand(str))
-				goto no_command;
 
-			free(str);
-			str = NULL;
-		}
-		else
+	while (str != NULL && strcmp(str, "quit") != 0)
+	{
+		while (strlen(str) == 0)
 		{
-no_command:
+			str = ufgets(stdin);
+		}
+
+		// Do something with command
+		if (!execCommand(str))     // 숫자로된 연산식도 excommand가 아니기때문에 넣어버림
+		{
 			numTokens = tokenize(str, &tokens);
 			free(str);
 			str = NULL;
 
-			if(prefs.display.tokens)
+			if (prefs.display.tokens)
 			{
 				printf("\t%d tokens:\n", numTokens);
-				for(i = 0; i < numTokens; i++)
+				for (i = 0; i < numTokens; i++)
 				{
 					printf("\t\"%s\"", tokens[i]);
-					if(tokenType(tokens[i]) == value)
+					if (tokenType(tokens[i]) == value)
 						printf(" = %f", buildNumber(tokens[i]));
 					printf("\n");
 				}
@@ -1332,17 +1316,11 @@ no_command:
 
 			// Convert to postfix
 			stackInit(&expr, numTokens);
-			if(prefs.display.postfix)
+			if (prefs.display.postfix)
 				printf("\tPostfix stack:\n");
 			postfix(tokens, numTokens, &expr);
-			//stackReverse(&expr);
-			/*printf("\tReversed postfix stack:\n\t");
-			for(i = 0; i < stackSize(&expr); i++)
-			{
-				printf("%s ", (token)(expr.content[i]));
-			}
-			printf("\n");*/
-			if(stackSize(&expr) != 1)
+
+			if (stackSize(&expr) != 1)
 			{
 				printf("\tError evaluating expression\n");
 			}
@@ -1351,7 +1329,7 @@ no_command:
 				if (!rflag)
 					printf("\t= ");
 				printf("%s\n", (char*)stackTop(&expr));
-				for (i=0; i< numTokens; i++)
+				for (i = 0; i < numTokens; i++)
 				{
 					if (tokens[i] == stackTop(&expr))
 						tokens[i] = NULL;
@@ -1359,7 +1337,7 @@ no_command:
 				free(stackPop(&expr));
 			}
 
-			for(i = 0; i < numTokens; i++)
+			for (i = 0; i < numTokens; i++)
 			{
 				if (tokens[i] != NULL)
 					free(tokens[i]);
@@ -1368,8 +1346,18 @@ no_command:
 			tokens = NULL;
 			numTokens = 0;
 			stackFree(&expr);
+
+
 		}
-get_new_string:
+		else {
+			free(str);
+			str = NULL;
+		}
+
+
+
+
+
 		str = ufgets(stdin);
 	}
 
