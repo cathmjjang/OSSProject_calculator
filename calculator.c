@@ -135,7 +135,7 @@ token doFunc(Stack *s, token function)
 	number num = buildNumber(input);
 	number result = num;
 	number counter = 0;
-	number i,j,temp;
+	number i,j,temp = 1;
 	if(strncmp(function, "abs", 3) == 0)
 		result = fabs(num);
 	else if(strncmp(function, "floor", 5) == 0)
@@ -221,6 +221,14 @@ token doFunc(Stack *s, token function)
          }
          result = temp;
       }
+   }else if (strncmp(function, "fac", 3) == 0)
+   {
+      for (i = 1; i <= num; i++)
+
+      {
+         temp = i * temp;
+      }
+      result = temp;
    }
 	else if(strncmp(function, "sum", 3) == 0)
 	{
@@ -542,6 +550,7 @@ bool isFunction(token tk)
 		|| strncmp(tk, "min", 3) == 0
 		|| strncmp(tk, "max", 3) == 0
     	  	|| strncmp(tk, "gcm", 3) == 0
+		|| strncmp(tk, "fac", 3) == 0
       		|| strncmp(tk, "lcm", 3) == 0
 		|| strncmp(tk, "sum", 3) == 0
 		|| strncmp(tk, "avg", 3) == 0
