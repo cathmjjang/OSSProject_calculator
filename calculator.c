@@ -82,18 +82,9 @@ void raise(Error err)
 	printf("\tError: %s\n", msg);
 }
 
-inline unsigned int toDigit(char ch)
-{
-	return ch - '0';
-}
-
 number buildNumber(token str)
 {
 	number result = 0;
-	/*while(*str && *str != '.')
-	{
-		result = result * 10 + toDigit(*str++);
-	}*/
 	result = strtod(str, NULL);
 	return result;
 }
