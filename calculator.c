@@ -1273,10 +1273,11 @@ int main(int argc, char *argv[])
 
 	printf("┌ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡHELPㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ┐\n");
 	printf("｜Operators[ex. 1 + 1]                                        ｜\n");
-	printf("｜ + , -, *, / , ^, %%                                        ｜\n");
+	printf("｜ + , -, *, / , ^, %%                                         ｜\n");
 	printf("｜Functions[ex.abs(-1)]                                       ｜\n");
 	printf("｜abs, floor, ceil, sin, cos, tan, arcsin, arccos, arctan,    ｜\n");
 	printf("｜sqrt, cbrt, log, exp, min, max, sum, mean, avg, median, var ｜\n");
+	printf("｜Plus Functions : fac, lcm, gcd                              ｜\n");
 	printf("├ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ┤\n");
 	printf("｜Settings[ex.get postfix / set postfix on]                   ｜\n");
 	printf("｜get / set                                                   ｜\n");
@@ -1285,7 +1286,7 @@ int main(int argc, char *argv[])
 	printf("｜mode(radians / degrees)                                     ｜\n");
 	printf("｜precision(X / auto)                                         ｜\n");
 	printf("｜Type quit to close                                          ｜\n");
-	printf("└ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ┘");
+	printf("└ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ┘\n");
 
 	while ((ch = getopt(argc, argv, "rm:")) != -1) {
 		switch (ch) {
