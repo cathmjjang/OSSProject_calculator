@@ -135,7 +135,7 @@ token doFunc(Stack *s, token function)
 	number num = buildNumber(input);
 	number result = num;
 	number counter = 0;
-
+	number i,j,temp;
 	if(strncmp(function, "abs", 3) == 0)
 		result = fabs(num);
 	else if(strncmp(function, "floor", 5) == 0)
@@ -185,6 +185,43 @@ token doFunc(Stack *s, token function)
 				result = num;
 		}
 	}
+	
+   else if (strncmp(function, "gcm", 3) == 0)
+   {
+      while (stackSize(s) > 0 && strcmp(stackTop(s), FUNCTIONSEPARATOR) != 0)
+      {
+         input = (token)stackPop(s);
+         num = buildNumber(input);
+
+         j = (result < num) ? result : num;
+         for (i = 1; i <= j; i++)
+         {
+            if ((int)result % (int)i == 0.0 && (int)num % (int)i == 0.0)
+               temp = i;
+         }
+         result = temp;
+      }
+   }
+   else if (strncmp(function, "lcm", 3) == 0)
+   {
+      while (stackSize(s) > 0 && strcmp(stackTop(s), FUNCTIONSEPARATOR) != 0)
+      {
+         input = (token)stackPop(s);
+         num = buildNumber(input);
+
+         j = (result > num) ? result : num;
+
+         for (i = j;; i++)
+         {
+            if ((int)i % (int)num == 0 && (int)i % (int)result == 0)
+            {
+               temp = i;
+               break;
+            }
+         }
+         result = temp;
+      }
+   }
 	else if(strncmp(function, "sum", 3) == 0)
 	{
 		while (stackSize(s) > 0  && strcmp(stackTop(s), FUNCTIONSEPARATOR) != 0)
@@ -504,6 +541,8 @@ bool isFunction(token tk)
 		|| strncmp(tk, "log", 3) == 0
 		|| strncmp(tk, "min", 3) == 0
 		|| strncmp(tk, "max", 3) == 0
+    	  	|| strncmp(tk, "gcm", 3) == 0
+      		|| strncmp(tk, "lcm", 3) == 0
 		|| strncmp(tk, "sum", 3) == 0
 		|| strncmp(tk, "avg", 3) == 0
 		|| strncmp(tk, "mean", 4) == 0
