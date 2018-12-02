@@ -186,7 +186,7 @@ token doFunc(Stack *s, token function)
 		}
 	}
 	
-   else if (strncmp(function, "gcm", 3) == 0)
+   else if (strncmp(function, "gcd", 3) == 0)
    {
       while (stackSize(s) > 0 && strcmp(stackTop(s), FUNCTIONSEPARATOR) != 0)
       {
@@ -549,7 +549,7 @@ bool isFunction(token tk)
 		|| strncmp(tk, "log", 3) == 0
 		|| strncmp(tk, "min", 3) == 0
 		|| strncmp(tk, "max", 3) == 0
-    	  	|| strncmp(tk, "gcm", 3) == 0
+    	  	|| strncmp(tk, "gcd", 3) == 0
 		|| strncmp(tk, "fac", 3) == 0
       		|| strncmp(tk, "lcm", 3) == 0
 		|| strncmp(tk, "sum", 3) == 0
